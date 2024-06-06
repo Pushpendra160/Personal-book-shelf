@@ -21,7 +21,7 @@ export const MovieCard = ({ movie }) => {
 
     //   <MovieControls type={type} movie={movie} />
     // </div>
-
+<div className="movie-card-container">
 <div className="movie-card">
   <img src={Book} alt="book" />
   <div className="card-info"> 
@@ -34,7 +34,7 @@ export const MovieCard = ({ movie }) => {
 </div>
 
 
-
+</div>
   );
 
 

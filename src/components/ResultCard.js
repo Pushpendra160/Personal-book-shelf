@@ -4,6 +4,7 @@ import { GlobalContext } from "../context/GlobalState";
 import Book from "../book.jpg"
 
 export const ResultCard = ({ book }) => {
+  
   const {
     addBookToShelf,
    
@@ -21,7 +22,14 @@ export const ResultCard = ({ book }) => {
   //   : false;
 
   // const watchedDisabled = storedbookWatched ? true : false;
+  if (!book) {
+    return <div>No book data available</div>;
+  }
 
+  // Check if the necessary properties are present in the book object
+  if ( !book.author_name || !book.author_key) {
+    return <div>Invalid book data</div>;
+  }
   return (
     <div className="result-card">
       <div className="poster-wrapper">

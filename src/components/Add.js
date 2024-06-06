@@ -4,12 +4,13 @@ import { ResultCard } from "./ResultCard";
 export const Add = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const onChange = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     setQuery(e.target.value);
-
+   
     fetch(
       `https://openlibrary.org/search.json?q=${e.target.value}&limit=10&page=1`
     )
@@ -17,6 +18,8 @@ export const Add = () => {
       .then((data) => {
         if (data && data.docs) {
           setResults(data.docs);
+    setLoading(false);
+
         } else {
           setResults([]);
         }
@@ -36,15 +39,17 @@ export const Add = () => {
             />
           </div>
 
-          {results && results.length > 0 && (
-            <ul className="results">
-              {results.map((book) => (
-                <li key={book.key}>
-                  <ResultCard book={book} />
-                </li>
-              ))}
-            </ul>
-          )}
+          {
+            loading===true? <h3>...Fetching data</h3>:
+          results && results.length > 0 && (
+  <ul className="results">
+    {results.map((book) => (
+      <li key={book.key}>
+        <ResultCard book={book} />
+      </li>
+    ))}
+  </ul>
+)}
         </div>
       </div>
     </div>
